@@ -1,9 +1,8 @@
-import sqlalchemy
-from sqlalchemy import create_engine, inspect, text
 
-engine = create_engine(
-    "mysql+pymysql://root:WzuDFQzGzJFzMrqtsasfsdUYTvuwCdLY@maglev.proxy.rlwy.net:39202/joviancareers"
-)
+from sqlalchemy import create_engine, inspect, text
+import os
+
+engine = create_engine(os.environ["DB_CONNECTION_STRING"])
 
 inspector = inspect(engine)
 print("Available tables:", inspector.get_table_names())
