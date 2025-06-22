@@ -1,8 +1,11 @@
-
 from sqlalchemy import create_engine, inspect, text
 import os
 
-engine = create_engine(os.environ["DB_CONNECTION_STRING_1"])
+db_url = os.getenv("DB_CONNECTION_STRING_1")
+if not db_url:
+    raise RuntimeError("Environment variable DB_CONNECTION_STRING_1 is not set")
+
+engine = create_engine(db_url)
 
 inspector = inspect(engine)
 print("Available tables:", inspector.get_table_names())
