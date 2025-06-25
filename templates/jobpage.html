@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>{{job.title}} - {{company_name}}
+      </title>
+     <meta charset="utf-8">
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    <h3>TITLE</h3>
+    <p>{{job.title}}</p>
+    <h3>LOCATION</h3>
+    <p class="lead">{{job.location}}</p>
+    <h3>SALARY</h3>
+    <p>{{job.salary}}</p>
+    <h3>CURRENCY</h3>
+    <p>{{job.currency}}</p>
+    <h3>RESPOINSIBILITIES</h3>
+    <ul>
+      {% for res in job.responsibilties.split("\n") %}
+      <li>{{res}}</li>
+      {% endfor %}
+    </ul>
+    <p>{{job.responsibilties}}</p>
+    <h3>REQUIREMENTS</h3>
+    <ul>
+      {% for req in job.requirements.split("\n") %}
+      <li>{{req}}</li>
+      {% endfor %}
+    </ul>
+    <p>{{job.requirements}}</p>
+    
+  </body>
+</html>

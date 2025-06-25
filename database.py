@@ -1,28 +1,33 @@
 from sqlalchemy import create_engine, inspect, text
 import os
 
-db_url = os.getenv("DB_CONNECTION_STRING_1")
-if not db_url:
+# Ensure environment variable is set
+if "DB_CONNECTION_STRING_1" not in os.environ:
     raise RuntimeError("Environment variable DB_CONNECTION_STRING_1 is not set")
 
-engine = create_engine(db_url)
+engine = create_engine(os.environ["DB_CONNECTION_STRING_1"])
 
+# Optional: print available tables
 inspector = inspect(engine)
 print("Available tables:", inspector.get_table_names())
-
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT * from Jobs"))
-
-    rows = result.mappings().all()  # returns list of MappingRow
-
-    print(rows)                     # full list
-    print(type(rows[0]))           # MappingRow
-    print(dict(rows[0]))           # convert to normal dict
 
 
 def load_jobs_from_db():
     with engine.connect() as conn:
         result = conn.execute(text("SELECT * FROM Jobs"))
-        rows = result.mappings().all()
+        rows = result.mappings().all()  # MappingRow to dict
         jobs = [dict(row) for row in rows]
         return jobs
+
+
+def load_job_from_db(id):
+    with engine.connect() as conn:
+        result = conn.execute(
+            text("SELECT * FROM Jobs WHERE id = :val"),
+            {"val": id}
+        )
+        rows = result.mappings().all()
+        if len(rows) == 0:
+            return None
+        else:
+            return dict(rows[0])
