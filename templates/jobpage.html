@@ -1,3 +1,5 @@
+{% include 'bootstrap.html' %}
+{% include 'nav.html' %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,30 +7,46 @@
       </title>
      <meta charset="utf-8">
   </head>
+  
   <body>
-    {% include 'nav.html' %}
-    <h3>TITLE</h3>
-    <p>{{job.title}}</p>
-    <h3>LOCATION</h3>
-    <p class="lead">{{job.location}}</p>
-    <h3>SALARY</h3>
-    <p>{{job.salary}}</p>
-    <h3>CURRENCY</h3>
-    <p>{{job.currency}}</p>
-    <h3>RESPOINSIBILITIES</h3>
-    <ul>
-      {% for res in job.responsibilties.split("\n") %}
-      <li>{{res}}</li>
-      {% endfor %}
-    </ul>
-    <p>{{job.responsibilties}}</p>
-    <h3>REQUIREMENTS</h3>
-    <ul>
-      {% for req in job.requirements.split("\n") %}
-      <li>{{req}}</li>
-      {% endfor %}
-    </ul>
-    <p>{{job.requirements}}</p>
-    
+    {% include 'banner.html' %}
+       <div class="container mt-4" style="max-width: 1200px; font-family: 'Roboto', sans-serif;">
+
+         <h1 class="text-center mb-4">Jovian Careers</h1>
+
+         <h3 class="text-primary">{{ job.title }}</h3>
+         <h5 class="text-muted mb-1">{{ job.location }}</h5>
+
+         <hr>
+
+         <h4 class="mt-4"> Salary</h4>
+         <p><li>{{ job.salary }} {{ job.currency }}</li></p>
+
+         <h4 class="mt-4"> Responsibilities</h4>
+         <ul>
+           {% for res in job.responsibilties.split(".") %}
+             {% if res.strip() %}
+               <li>{{ res.strip() }}.</li>
+             {% endif %}
+           {% endfor %}
+         </ul>
+
+         <h3 class="mt-4"> Requirements</h3>
+         <ol>
+            {% for res in job.requirements.split(".") %}
+              {% if res.strip() %}
+                <li>{{ res.strip() }}.</li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+
+       </div>
+       <div class='text-center'>
+         <button type="button" class="btn btn-primary"
+                 style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: 5rem; --bs-btn-font-size: 1.5rem;">
+           Apply
+         </button>
+       </div>
+       {% include 'footer.html' %}
   </body>
 </html>

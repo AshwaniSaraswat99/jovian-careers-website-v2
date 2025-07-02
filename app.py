@@ -34,8 +34,7 @@ def hello_world():
     print("hello")
     jobs=load_jobs_from_db()
     
-    return render_template('home.html',jobs=jobs,company_name="Appo ki company")
-
+    return render_template('home.html',jobs=jobs,company_name="Jovian")
 @app.route('/job/<id>')
 def show_job(id):
     job=load_job_from_db(id)

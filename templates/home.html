@@ -2,23 +2,14 @@
 <html>
   <head>
       <title>{{company_name}} career</title>
-      {% include 'bootstrap.html' %}
-    <style>
-      #banner{
-        height:380px;
-        width:100%;
-        object-fit:cover;
-        margin-bottom:20px;
-      }
-    </style>
-     
-    
+      {% include 'bootstrap.html' %} 
   </head>
+  
    <body>
      {% include 'nav.html' %}
-     <img class="img-fluid" id="banner" src="static/banner.jpg" alt="banner" >
+     {% include 'banner.html' %}
      <div class="container"> 
-       <h1 class="text-center mt-2 mb-4">{{company_name}} Careers</h1>
+       <h1 class="text-center mt-2 mb-4">Jovian Careers</h1>
        <p class="bodytext">Welcome to Jovian Careers. We help you find your dream job.</p>
        <h2 class="text-center mt-2 mb-4">About us</h2>
        <div class="row">
