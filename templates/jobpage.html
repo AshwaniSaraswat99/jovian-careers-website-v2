@@ -41,12 +41,16 @@
           </ol>
 
        </div>
-       <div class='text-center'>
-         <button type="button" class="btn btn-primary"
-                 style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: 5rem; --bs-btn-font-size: 1.5rem;">
-           Apply
-         </button>
+       
+         {% include 'applicationform.html' with context %}
        </div>
        {% include 'footer.html' %}
+    <script>
+      function showForm() {
+        const form = document.getElementById('application-form');
+        form.classList.remove('d-none');
+        form.scrollIntoView({ behavior: 'smooth' });
+      }
+    </script>
   </body>
 </html>

@@ -31,3 +31,24 @@ def load_job_from_db(id):
             return None
         else:
             return dict(rows[0])
+def add_application_to_db(job_id, data):
+    with engine.begin() as conn:  
+        query = text("""
+            INSERT INTO application (
+                job_id, name, email, contact, linkedin,
+                education, work_experience, resume
+            ) VALUES (
+                :job_id, :name, :email, :contact, :linkedin,
+                :education, :work_experience, :resume
+            )
+        """)
+        conn.execute(query, {
+            'job_id': job_id,
+            'name': data['name'],
+            'email': data['email'],
+            'contact': data['Contact'],
+            'linkedin': data['linked_in'],
+            'education': data['Education'],
+            'work_experience': data['Work_Experience'],
+            'resume': data['resume']
+        })

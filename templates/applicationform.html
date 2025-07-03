@@ -1,0 +1,43 @@
+<div class='text-center'>
+   <button type="button" class="btn btn-primary" onclick="showForm()"
+           style="--bs-btn-padding-y: .2rem; --bs-btn-padding-x: 5rem; --bs-btn-font-size: 1.5rem;">
+     Apply
+   </button>
+
+<!-- Application Form (initially hidden) -->
+
+<div id="application-form" class="mt-5 d-none">
+  <h4>Application Form</h4>
+  <form method="POST" action="/job/{{ job.id }}/apply">
+    <div class="mb-3">
+      <label for="name" class="form-label">Full Name</label>
+      <input type="text" class="form-control" name="name" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" name="email" required>
+    </div>
+    <div class="mb-3">
+      <label for="Contact" class="form-label">Contact</label>
+      <input type="number" class="form-control" name="Contact" required>
+    </div>
+    <div class="mb-3">
+      <label for="resume" class="form-label">Resume Link</label>
+      <input type="url" class="form-control" name="resume" >
+    </div>
+    <div class="mt-3">
+      <label for="linked_in" class="form-label">LinkedIn Profile</label>
+      <input type="url" class="form-control" name="linked_in" >
+      </div>
+    <div class="mb-3">
+      <label for="Education" class="form-label">Education</label>
+      <textarea type="text" class="form-control" name="Education" ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="work_experience" class="form-label">Work Experience</label>
+      <textarea type="text" class="form-control" name="Work_Experience" ></textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    
+  </form>
+</div>
