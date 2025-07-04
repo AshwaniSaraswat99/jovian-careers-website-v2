@@ -52,3 +52,11 @@ def add_application_to_db(job_id, data):
             'work_experience': data['Work_Experience'],
             'resume': data['resume']
         })
+
+def check_user_credentials(username, password, role):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT * FROM users WHERE username = :username AND password = :password AND role = :role
+        """), {'username': username, 'password': password, 'role': role})
+        row = result.mappings().first()
+        return row

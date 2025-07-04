@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  {% include 'bootstrap.html' %}
+</head>
+<body class="p-3 mb-2 bg-success text-white fluid" style="background: url('{{ url_for('static', filename='login1.jpg') }}') no-repeat center center / cover;">
+
+  {% include 'nav.html' %}
+
+  <!-- Wrapper with border, padding, and rounded corners -->
+  <div class="wrapper mx-auto mt-5 rounded-4 border border-light p-4" style="max-width: 500px; background-color: rgba(0, 0, 0, 0.6);">
+
+    <form method="POST" action="/login">
+
+      <!-- Login Heading -->
+      <h2 class="text-center text-light mb-4">LOGIN</h2>
+
+      <!-- Username Input -->
+      <div class="mb-3">
+        <label class="form-label text-light" for="username">Email or Username</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+              class="bi bi-person-circle" viewBox="0 0 16 16">
+              <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7
+                a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757
+                1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+            </svg>
+          </span>
+          <input type="text" class="form-control" name="username" id="username" required placeholder="Username">
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="mb-3">
+        <label class="form-label text-light" for="password">Password</label>
+        <div class="input-group">
+          <span class="input-group-text">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-key" viewBox="0 0 16 16"><path d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8m4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5"/><path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+            </svg>
+          </span>
+          <input type="password" class="form-control" name="password" id="password" required placeholder="Password">
+          <span class="input-group-text" onclick="togglePassword()" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+              <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+              <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+            </svg>
+          <!--eye icon-->
+          </span>
+
+        </div>
+      </div>
+
+      <!-- Remember Me & Forgot Password -->
+      <div class="d-flex justify-content-between mb-3">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="rememberMe">
+          <label class="form-check-label text-light" for="rememberMe">Remember me</label>
+        </div>
+        <a href="#" class="text-light text-decoration-underline">Forgot password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <div class="d-grid gap-2 col-6 mx-auto mb-3">
+        <button class="btn btn-light" type="submit">Login</button>
+      </div>
+
+      <!-- Register Link -->
+      <div class="text-center">
+        <p class="text-light">Don't have an account?
+          <a href="/register" class="text-warning text-decoration-underline">Register</a>
+        </p>
+      </div>
+
+    </form>
+  </div> 
+</body>
+<div style="background-color: white; opacity: 70%;">
+  {% include 'footer.html' %}
+</div>
+  <script src="static/JS/main.js"></script>
+</html>
