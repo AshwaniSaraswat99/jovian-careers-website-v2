@@ -1,5 +1,5 @@
-from flask import Flask,render_template,jsonify,request,redirect,session
-from database import load_jobs_from_db,load_job_from_db,add_application_to_db,check_user_credentials
+from flask import Flask,render_template,jsonify,request,redirect,session, flash
+from database import load_jobs_from_db,load_job_from_db,add_application_to_db,check_user_credentials,check_user_exists,create_new_user
 from typing import Optional, Dict, Any
 from datetime import timedelta
 import os
@@ -84,7 +84,46 @@ def login_user():
 def logout_user():
     session.clear()
     return redirect('/')
-        
+
+@app.route("/sign_up", methods=['GET', 'POST'])
+def sign_up():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        captcha = request.form.get('captcha')
+        expected_captcha = session.get('captcha_value')
+
+        # 1. Check if user already exists
+        if check_user_exists(email=email, username=username):
+            flash("User already exists. Please login instead.", "warning")
+            return redirect('/login')
+
+        # 2. Check password match
+        if password != confirm_password:
+            flash("Passwords do not match.", "danger")
+            return redirect('/sign_up')
+
+        # 3. Validate CAPTCHA
+        if captcha != expected_captcha:
+            flash("Invalid CAPTCHA. Please try again.", "danger")
+            return redirect('/sign_up')
+
+        # 4. Create new user
+        try:
+            create_new_user(email, username, phone, password, confirm_password)
+            flash("Sign-up successful! Please log in.", "success")
+            return redirect('/login')
+        except Exception as e:
+            print("Error creating user:", e)
+            flash("Something went wrong. Please try again.", "danger")
+            return redirect('/sign_up')
+
+    # GET request → show the signup form
+    return render_template('signup.html')
+
 
 
 if __name__=='__main__':

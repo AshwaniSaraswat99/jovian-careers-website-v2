@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  {% include 'bootstrap.html' %}
+</head>
+<body style="background: url('{{ url_for('static', filename='login1.jpg') }}') no-repeat center center / cover;" onload="generateCaptcha()">
+  {% include 'nav.html' %}
+  <div style="height: 90px"></div>
+
+  <!-- Styled Sign-Up Form Container -->
+  <div class="container mt-4">
+    <div class="mx-auto rounded-4 border border-light p-4" style="max-width: 550px; background-color: rgba(0, 0, 0, 0.6);">
+      <h2 class="text-center text-light mb-4">Sign Up</h2>
+
+      <form method="POST" action="/sign_up">
+        <!-- Username Field -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your username">
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="email">Email</label>
+          <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+        </div>
+
+        <!-- Phone Field -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="phone">Phone</label>
+          <input type="number" class="form-control" id="phone" name="phone" required placeholder="Enter your phone number">
+        </div>
+
+        <!-- Password Field -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="confirm_password">Confirm Password</label>
+          <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Re-enter your password">
+        </div>
+
+        <!-- Captcha Section -->
+        <div class="mb-3">
+          <label class="form-label text-light" for="captcha">Captcha</label>
+          <div class="d-flex gap-2 align-items-center">
+            <span class="border border-light p-2 text-white" id="cap">alok</span>
+            <input type="text" class="form-control" id="captcha" name="captcha" required placeholder="Enter captcha">
+            <button class="btn btn-warning" type="button" onclick="refresh()">Refresh</button>
+          </div>
+        </div>
+
+        <!-- Sign Up Button -->
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-light" type="submit" onclick="validateCaptcha()">Sign Up</button>
+        </div>
+
+        <!-- Redirect to Login -->
+        <div class="text-center mt-3 text-light">
+          Already have an account?
+          <a href="/login" class="text-warning text-decoration-underline">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% include 'footer.html' %}
+  <script src="static/JS/main.js"></script>
+</body>
+</html>

@@ -60,3 +60,34 @@ def check_user_credentials(username, password, role):
         """), {'username': username, 'password': password, 'role': role})
         row = result.mappings().first()
         return row
+
+def check_user_exists(email, username):
+    with engine.connect() as conn:
+        result = conn.execute(text("""
+            SELECT id FROM users WHERE email = :email OR username = :username
+        """), {'email': email, 'username': username}).fetchone()
+        return result is not None
+
+def create_new_user(email, username, contact, password, confirm_password):
+    with engine.begin() as conn:
+        # Insert into users table
+        conn.execute(text("""
+            INSERT INTO users (email, username, password, role)
+            VALUES (:email, :username, :password, 'user')
+        """), {
+            'email': email,
+            'username': username,
+            'password': password
+        })
+
+        # Insert into Registration table
+        conn.execute(text("""
+            INSERT INTO Registration (username, email, contact, password, confirm_password)
+            VALUES (:username, :email, :contact, :password, :confirm_password)
+        """), {
+            'username': username,
+            'email': email,
+            'contact': contact,
+            'password': password,
+            'confirm_password': confirm_password
+        })
