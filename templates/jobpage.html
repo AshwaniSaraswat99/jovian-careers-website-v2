@@ -3,48 +3,54 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <title>{{job.title}} - {{company_name}}
-      </title>
-     <meta charset="utf-8">
+    <title>{{ job.title }} - {{ company_name }}</title>
+    <meta charset="utf-8">
   </head>
-  
   <body>
     {% include 'banner.html' %}
-       <div class="container mt-4" style="max-width: 1200px; font-family: 'Roboto', sans-serif;">
+    <div class="container mt-4" style="max-width: 1200px; font-family: 'Roboto', sans-serif;">
 
-         <h1 class="text-center mb-4">Jovian Careers</h1>
+      <h1 class="text-center mb-4">Jovian Careers</h1>
 
-         <h3 class="text-primary">{{ job.title }}</h3>
-         <h5 class="text-muted mb-1">{{ job.location }}</h5>
+      <h3 class="text-primary">{{ job.title }}</h3>
+      <h5 class="text-muted mb-1">{{ job.location }}</h5>
 
-         <hr>
+      <hr>
 
-         <h4 class="mt-4"> Salary</h4>
-         <p><li>{{ job.salary }} {{ job.currency }}</li></p>
+      <h4 class="mt-4">Salary</h4>
+      <p><li>{{ job.salary }} {{ job.currency }}</li></p>
 
-         <h4 class="mt-4"> Responsibilities</h4>
-         <ul>
-           {% for res in job.responsibilties.split(".") %}
-             {% if res.strip() %}
-               <li>{{ res.strip() }}.</li>
-             {% endif %}
-           {% endfor %}
-         </ul>
+      <h4 class="mt-4">Responsibilities</h4>
+      {% if job.responsibilities %}
+        <ul>
+          {% for res in job.responsibilities.split(".") %}
+            {% if res.strip() %}
+              <li>{{ res.strip() }}.</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-muted">No responsibilities listed for this role.</p>
+      {% endif %}
 
-         <h3 class="mt-4"> Requirements</h3>
-         <ol>
-            {% for res in job.requirements.split(".") %}
-              {% if res.strip() %}
-                <li>{{ res.strip() }}.</li>
-              {% endif %}
-            {% endfor %}
-          </ol>
+      <h3 class="mt-4">Requirements</h3>
+      {% if job.requirements %}
+        <ol>
+          {% for res in job.requirements.split(".") %}
+            {% if res.strip() %}
+              <li>{{ res.strip() }}.</li>
+            {% endif %}
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p class="text-muted">No requirements listed.</p>
+      {% endif %}
 
-       </div>
-       
-         {% include 'applicationform.html' with context %}
-       </div>
-       {% include 'footer.html' %}
+    </div>
+
+    {% include 'applicationform.html' with context %}
+    {% include 'footer.html' %}
+
     <script>
       function showForm() {
         const form = document.getElementById('application-form');
