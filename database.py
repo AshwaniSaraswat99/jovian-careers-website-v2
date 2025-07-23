@@ -1,11 +1,12 @@
 from sqlalchemy import create_engine, inspect, text
 import os
+import psycopg2
 
 # Ensure environment variable is set
-if "DB_CONNECTION_STRING_1" not in os.environ:
-    raise RuntimeError("Environment variable DB_CONNECTION_STRING_1 is not set")
+if "DB_CONNECTION_STRING2" not in os.environ:
+    raise RuntimeError("Environment variable DB_CONNECTION_STRING_2 is not set")
 
-engine = create_engine(os.environ["DB_CONNECTION_STRING_1"])
+engine = create_engine(os.environ["DB_CONNECTION_STRING2"])
 
 # Optional: print available tables
 inspector = inspect(engine)

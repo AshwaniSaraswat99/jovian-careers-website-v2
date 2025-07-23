@@ -1,8 +1,9 @@
-modules = ["python-3.12", "web", "nix"]
+modules = ["python-3.12", "web", "nodejs-20", "nix"]
 run = "python app.py"
 
 [nix]
 channel = "stable-24_05"
+packages = ["cacert"]
 
 [deployment]
 run = ["sh", "-c", "python app.py"]
